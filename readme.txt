@@ -1,10 +1,10 @@
 Group Members:
-- Agoth Arop
-- [Add your names here]
-- [Add your names here]
-- [Add your names here]
-- [Add your names here]
-- [Add your names here]
+- Agoth Arop -> ccid: agoth
+- [Add your names & ccid here]
+- [Add your names & ccid here]
+- [Add your names & ccid here]
+- [Add your names & ccid here]
+- [Add your names & ccid here]
 
 Note on Collaboration:
 - We collaborated with no one else but the stated group members above.
