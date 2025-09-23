@@ -4,7 +4,7 @@ CREATE TABLE Users (
   email CHAR(25),
   city CHAR(20),
   timeZone CHAR(3),
-  PRIMARY KEY (uid)
+  PRIMARY KEY (uid))
 
 CREATE TABLE follows (
   uid1 CHAR(12),
@@ -21,9 +21,10 @@ CREATE TABLE Bot (
 
 CREATE TABLE owner (
   uid1 CHAR(12),
-  uid2 CHAR(12)
+  uid2 CHAR(12),
   PRIMARY KEY (uid1, uid2),
-  FOREIGN KEY (uid) REFERENCES Users)
+  FOREIGN KEY (uid1) REFERENCES Users),
+  FOREIGN KEY (uid2) REFERENCES Users)
 
 CREATE TABLE Blue (
   uid CHAR(12),
@@ -39,10 +40,11 @@ CREATE TABLE Gray (
 
 CREATE TABLE affiliate (
   uid1 CHAR(12),
-  uid2 CHAR(12)
+  uid2 CHAR(12),
   cdate DATE,
   PRIMARY KEY (uid1, uid2),
-  FOREIGN KEY (uid) REFERENCES Users,
+  FOREIGN KEY (uid1) REFERENCES Users,
+  FOREIGN KEY (uid2) REFERENCES Users,
   FOREIGN KEY (vdate) REFERENCES Gray)
 
 CREATE TABLE lists_created (
@@ -99,7 +101,7 @@ CREATE TABLE mentionsU (
   PRIMARY KEY (shortURL, tdate, uid),
   FOREIGN KEY (shortURL) REFERENCES URLs,
   FOREIGN KEY (tdate) REFERENCES tweets_written
-  FOREIGN KEY (uid) REFERENCES UID
+  FOREIGN KEY (uid) REFERENCES Users
   ON DELETE CASCADE)
 
 CREATE TABLE replto (
@@ -109,6 +111,7 @@ CREATE TABLE replto (
   PRIMARY KEY (reply_tdate, original_tdate, uid),
   FOREIGN KEY (reply_tdate) REFERENCES tweets_written,
   FOREIGN KEY (original_tdate) REFERENCES tweets_written
-  FOREIGN KEY (uid) REFERENCES UID
+  FOREIGN KEY (uid) REFERENCES Users
   ON DELETE CASCADE)
+
 
