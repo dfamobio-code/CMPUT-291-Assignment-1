@@ -85,20 +85,26 @@ CREATE TABLE URLs (
 CREATE TABLE mentionsH (
   term CHAR(25),
   tdate DATE,
-  PRIMARY KEY (term, tdate),
+  uid CHAR(12) NOT NULL,
+  PRIMARY KEY (term, tdate, uid),
   FOREIGN KEY (term) REFERENCES hastags,
-  FOREIGN KEY (tdate) REFERENCES tweets_written)
+  FOREIGN KEY (tdate) REFERENCES tweets_written
+  ON DELETE CASCADE)
 
 CREATE TABLE mentionsU (
   shortURL CHAR(20),
   tdate DATE,
-  PRIMARY KEY (shortURL, tdate),
+  uid CHAR(12) NOT NULL,
+  PRIMARY KEY (shortURL, tdate, uid),
   FOREIGN KEY (shortURL) REFERENCES URLs,
-  FOREIGN KEY (tdate) REFERENCES tweets_written)
+  FOREIGN KEY (tdate) REFERENCES tweets_written
+  ON DELETE CASCADE)
 
 CREATE TABLE replto (
   reply_tdate DATE,
-  original_tdate DATE.
-  PRIMARY KEY (reply_tdate),
+  original_tdate DATE,
+  uid CHAR(12) NOT NULL,
+  PRIMARY KEY (reply_tdate, original_tdate, uid),
   FOREIGN KEY (reply_tdate) REFERENCES tweets_written,
-  FOREIGN KEY (original_tdate) REFERENCES tweets_written)
+  FOREIGN KEY (original_tdate) REFERENCES tweets_written
+  ON DELETE CASCADE)
