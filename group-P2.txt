@@ -23,7 +23,7 @@ CREATE TABLE owner (
   uid1 CHAR(12),
   uid2 CHAR(12),
   PRIMARY KEY (uid1, uid2),
-  FOREIGN KEY (uid1) REFERENCES Users),
+  FOREIGN KEY (uid1) REFERENCES Users,
   FOREIGN KEY (uid2) REFERENCES Users)
 
 CREATE TABLE Blue (
@@ -113,6 +113,7 @@ CREATE TABLE replto (
   FOREIGN KEY (original_tdate) REFERENCES tweets_written
   FOREIGN KEY (uid) REFERENCES Users
   ON DELETE CASCADE)
+
 
 
 
