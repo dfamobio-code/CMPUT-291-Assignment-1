@@ -91,7 +91,7 @@ CREATE TABLE mentionsH (
   PRIMARY KEY (term, tdate, uid),
   FOREIGN KEY (term) REFERENCES hastags,
   FOREIGN KEY (tdate) REFERENCES tweets_written
-  FOREIGN KEY (uid) REFERENCES UID
+  FOREIGN KEY (uid) REFERENCES Users
   ON DELETE CASCADE)
 
 CREATE TABLE mentionsU (
@@ -113,5 +113,6 @@ CREATE TABLE replto (
   FOREIGN KEY (original_tdate) REFERENCES tweets_written
   FOREIGN KEY (uid) REFERENCES Users
   ON DELETE CASCADE)
+
 
 
