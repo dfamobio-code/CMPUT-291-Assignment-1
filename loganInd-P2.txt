@@ -4,57 +4,62 @@ CREATE TABLE Users (
   email CHAR(25),
   city CHAR(20),
   timeZone CHAR(3),
-  PRIMARY KEY (uid))
+  PRIMARY KEY (uid)
 
 CREATE TABLE follows (
-  uid CHAR(12),
+  uid1 CHAR(12),
+  uid2 CHAR(12),
   started DATE,
-  PRIMARY KEY (uid, uid)
+  PRIMARY KEY (uid1, uid2),
   FOREIGN KEY (uid) REFERENCES Users)
 
-*CREATE TABLE Bot (
+CREATE TABLE Bot (
   uid CHAR(12),
   PRIMARY KEY (uid),
-  FOREIGN KEY uid REFERENCES Users ON DELETE CASCADE)
+  FOREIGN KEY uid REFERENCES Users
+  ON DELETE CASCADE)
 
-*CREATE TABLE owner (
-  uid CHAR(12),
-  PRIMARY KEY (uid, uid),
+CREATE TABLE owner (
+  uid1 CHAR(12),
+  uid2 CHAR(12)
+  PRIMARY KEY (uid1, uid2),
   FOREIGN KEY (uid) REFERENCES Users)
 
-C*REATE TABLE Blue (
+CREATE TABLE Blue (
   uid CHAR(12),
   cardno INTEGER,
-  PRIMARY KEY (uid, cardno),
+  PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES Users)
 
-*CREATE TABLE Gray (
+CREATE TABLE Gray (
   uid CHAR(12),
   vdate DATE,
-  PRIMARY KEY (uid, vdate),
+  PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES Users)
 
-*CREATE TABLE affiliate (
-  uid CHAR(12),
+CREATE TABLE affiliate (
+  uid1 CHAR(12),
+  uid2 CHAR(12)
   cdate DATE,
-  PRIMARY KEY (uid, vdate),
+  PRIMARY KEY (uid1, uid2),
   FOREIGN KEY (uid) REFERENCES Users,
   FOREIGN KEY (vdate) REFERENCES Gray)
 
-CREATE TABLE list_create (
+CREATE TABLE lists_created (
   name CHAR(20),
   uid CHAR(12) NOT NULL,
   PRIMARY KEY (name, uid),
-  FOREIGN KEY (uid) REFERNCES Users ON DELETE CASCADE)
+  FOREIGN KEY (uid) REFERENCES Users 
+  ON DELETE CASCADE)
 
 CREATE TABLE includes (
   name CHAR(20),
   uid CHAR(12),
   PRIMARY KEY (name, uid),
-  FOREIGN KEY (name) REFERENCES list_create,
+  FOREIGN KEY (name) REFERENCES list_created,
   FOREIGN KEY (uid) REFERENCES Users)
 
-CREATE TABLE write_tweets (
+CREATE TABLE tweets_written (
   tdate DATE,
   text TEXT,
   uid CHAR(12) NOT NULL,
@@ -66,6 +71,7 @@ CREATE TABLE RETWEETS (
   uid CHAR(12),
   PRIMARY KEY (rdate, uid),
   FOREIGN KEY (uid) REFERENCES Users)
+  FOREIGN KEY (tdate) REFERENCES tweets_written)
 
 CREATE TABLE hashtags (
   term CHAR(25),
@@ -81,18 +87,18 @@ CREATE TABLE mentionsH (
   tdate DATE,
   PRIMARY KEY (term, tdate),
   FOREIGN KEY (term) REFERENCES hastags,
-  FOREIGN KEY (tdate) REFERENCES tweets)
+  FOREIGN KEY (tdate) REFERENCES tweets_written)
 
 CREATE TABLE mentionsU (
   shortURL CHAR(20),
   tdate DATE,
   PRIMARY KEY (shortURL, tdate),
   FOREIGN KEY (shortURL) REFERENCES URLs,
-  FOREIGN KEY (tdate) REFERENCES tweets)
+  FOREIGN KEY (tdate) REFERENCES tweets_written)
 
 CREATE TABLE replto (
   reply_tdate DATE,
   original_tdate DATE.
   PRIMARY KEY (reply_tdate),
-  FOREIGN KEY (reply_tdate) REFERENCES tweets,
-  FOREIGN KEY (original_tdate) REFERNCES tweets)
+  FOREIGN KEY (reply_tdate) REFERENCES tweets_written,
+  FOREIGN KEY (original_tdate) REFERENCES tweets_written)
