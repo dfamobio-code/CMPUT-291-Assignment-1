@@ -3,7 +3,7 @@ Group Members:
 - Jianbo Gao -> ccid: jianbo3
 - Alexander Taschuk -> ccid: amtaschu
 - Logan Pope -> ccid: lapope
-- [Add your names & ccid here]
+- Akhshra Purushothaman -> ccid: akhshra
 - [Add your names & ccid here]
 
 Note on Collaboration:
